@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		    <meta charset="utf-8">
+		    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		    <meta name="viewport" content="width=device-width, initial-scale=1">  
+		    <meta name="description" content="">
+		    <meta name="author" content="">
+			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+		    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">  
+	<style>
+		html,
+		body {
+		  overflow-x: hidden;
+		}
+        .body123{
+    color:white;
+}
+
+		body {
+		  padding-top: 70px;
+		}
+		footer {
+		  padding: 30px 0;
+		}		
+		@media screen and (max-width: 767px) {
+		  .row-offcanvas {
+		    position: relative;
+		    -webkit-transition: all .25s ease-out;
+		    -o-transition: all .25s ease-out;
+		    transition: all .25s ease-out;
+		  }		
+		  .row-offcanvas-right {
+		    right: 0;
+		  }		
+		  .row-offcanvas-left {
+		    left: 0;
+		  }		
+		  .row-offcanvas-right
+		  .sidebar-offcanvas {
+		    right: -50%; /* 6 columns */
+		  }		
+		  .row-offcanvas-left
+		  .sidebar-offcanvas {
+		    left: -50%; /* 6 columns */
+		  }		
+		  .row-offcanvas-right.active {
+		    right: 50%; /* 6 columns */
+		  }		
+		  .row-offcanvas-left.active {
+		    left: 50%; /* 6 columns */
+		  }		
+		  .sidebar-offcanvas {
+		    position: absolute;
+		    top: 0;
+		    width: 50%; /* 6 columns */
+		  }
+		}
+		.logoutLblPos{		
+		   position:fixed;
+		   right:10px;
+		   top:5px;
+		}
+	</style>
+
+ </head>
+	  <body> 
+		<div ng-app="MtaaS" data-ng-controller="MtaaS1">
+		    <nav class="navbar navbar-fixed-top navbar-inverse">
+		      <div class="container">
+		        <div class="navbar-header">
+		          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		            <span class="sr-only">Toggle navigation</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		          </button>
+		          <a class="navbar-brand" href="#" ng-click = "home()">MTaaS Crowdsourcing</a>
+		        </div>
+		        <div id="navbar" class="collapse navbar-collapse">
+		          <ul class="nav navbar-nav">
+		            <li><a href="#" ng-click="home()">Home</a></li>
+		            <li><a href="#" ng-click="developerprofile()">Profile</a></li>
+		            <li class="active"><a href="#" ng-click="developerproject()">My Projects</a></li>
+		            <li><a href="#" ng-click="developerdashboard()">Dashboard</a></li>
+		            <li><a href="#" ng-click="developerdefects()">Defects</a></li>
+                      <li><a href="#" ng-click="billing()">Billing</a></li>
+		          </ul>
+		           <div class = "body123">
+          
+        
+	          <label class="logoutLblPos"><h6><span id="time"></span>
+	          <a type="submit" align="right" class="btn btn-success" ng-click="logoutsession()" role="button" >Logout</a>
+	          </label> </h6></div>
+		        </div><!-- /.nav-collapse -->
+		      </div><!-- /.container -->
+		    </nav><!-- /.navbar -->
+		    <div class="container">
+		      <div class="row row-offcanvas row-offcanvas-right">
+		
+		        <div class="col-xs-12 col-sm-9">
+		          <p class="pull-right visible-xs">
+		            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+		          </p>
+		          <div class="jumbotron">
+		              <h2 color="Red"><b>ADD PROJECT</b></h2>
+		                  
+		              
+		              <div class="container well" style="margin-top: 50px">
+					<form name="myForm">
+					  <p>Project Basic Information</p>
+						<a name="sbi"></a>
+					  <div class="form-group col-md-12">
+						<table style = width=30%">
+						
+						
+						<div class="form-group col-md-12">
+						<input class="form-control" type="text" placeholder="Project Name" name="projectname" ng-model="projectname">
+						</div>
+									
+					     	  <div class="form-group col-md-12">
+							<input class="form-control" name="description" ng-model="description" placeholder="1 Line Description about your project" type="text">
+						  </div>
+						  <div class="form-group col-md-12">
+							<input class="form-control" name="requirement" ng-model="requirement" placeholder="Requirement Document Link" type="text">
+						  </div>
+						  <div class="form-group col-md-6">
+							<Select class="form-control"  name="plan" ng-model="plan" placeholder="Select Plan">
+							<option value="null">Select Plan</option>
+							<option value="Basic">Basic</option>
+							<option value="Standard">Standard</option>
+							<option value="Premium">Premium</option>
+							</select>
+						  </div>
+						  <div class="form-group col-md-6">
+							<a href = "#" ng-click = "viewplans()"> <h4 style = "color: black"><u>View Plans</u></h4></a>
+						  </div>
+							<div class="clearfix">		          
+							</div>
+							<p>App Provider Address Information</p>					
+							<div class="form-group col-md-12">
+								<input class="form-control" name="addressline1" ng-model="addressline1" placeholder="Address Line 1" type="text">
+							</div>
+							<div class="form-group col-md-12">
+							   <input class="form-control" name="addressline2" ng-model="addressline2" placeholder="Address Line 2" type="text">
+							</div>
+							<div class="form-group col-md-6">
+							   <input class="form-control" name="city" ng-model="city" placeholder="City" type="tel">
+							</div>		
+							<div class="form-group col-md-6">
+							   <input class="form-control" name="postcode" ng-model="postcode" placeholder="Post Code" type="text">
+							</div>
+							<div class="form-group col-md-6">
+							   <input class="form-control" name="country" ng-model="country" placeholder="Country" type="text">
+							</div>
+							<div class="form-group col-md-6">
+							   <input class="form-control" name="state" ng-model="state" placeholder="State" type="text">
+							</div>
+							<div class="clearfix">		          
+							</div>
+							<!-- Developer Contact Information -->
+							<p>App Provider Primary Contact Information</p>										
+						    <div class="form-group col-md-12">
+						       <input class="form-control" name="phone" ng-model="phone" placeholder="Phone Number" type="tel">
+						     </div>
+						     <div class="form-group col-md-12">
+						       <input class="form-control" name="developeremail" ng-model="developeremail" placeholder="Email id" type="email">
+						     </div>
+							<!-- Project details Information Ends Here -->
+							<div class="form-group col-md-12">
+						       <div class="checkbox">
+						         <label>
+						           <input id="terms" name="terms" type="checkbox"> 
+						           I have read, consent and agree to MTaas Crowdsourcing's User Agreement and Privacy Policy.
+						         </label>
+						       </div>
+						     </div>	
+							<input type="submit" name="Add Project"class="btn btn-success" ng-click="addprojectdetails()">
+								</div>					
+									</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</center>
+  
+<script type ='text/javascript'>
+	var app=angular.module('MtaaS', [])
+	 app.controller('MtaaS1', ['$scope', '$http', '$window', function ( $scope,$http,$window)
+	 {	
+		$scope.addprojectdetails = function (){
+				var in_projectname = $scope.projectname;
+				var in_description = $scope.description;
+				var in_requirement = $scope.requirement;
+				var in_plan = $scope.plan;
+				var in_addressline1= $scope.addressline1;
+				var in_addressline2 = $scope.addressline2;
+				var in_city = $scope.city;
+				var in_postcode = $scope.postcode;
+				var in_country = $scope.country;
+				var in_state = $scope.state;
+				var in_phone=$scope.phone;
+				var in_developeremail=$scope.developeremail;
+				
+				if (in_projectname == null || in_projectname == "")
+	{
+		alert("Project Name cannot be empty");
+		return;
+	}
+
+	
+	
+	if (in_description == null || in_description == "")
+	{
+		alert("Project Description cannot be empty");
+		return;
+	}
+	if (in_requirement == null || in_requirement == "")
+	{
+		alert("Please enter your Project Requirement document link");
+		return;
+	}
+	if (in_plan == null || in_plan == "")
+	{
+		alert("Please select your plan");
+		return;
+	}
+	if (in_addressline1 == null || in_addressline1 == "")
+	{
+		alert("Address Line 1 cannot be empty");
+		return;
+	}
+	if (in_addressline2 == null || in_addressline2 == "")
+	{
+		alert("Address Line 2 cannot be empty");
+		return;
+	}		
+	if (in_city == null || in_addressline2 == "")
+	{
+		alert("City cannot be empty");
+		return;
+	}if (in_postcode == null || in_addressline2 == "")
+	{
+		alert("Postcode cannot be empty");
+		return;
+	}
+	if (in_country == null || in_country == "")
+	{
+		alert("Country cannot be empty");
+		return;
+	}
+	if (in_state == null || in_state == "")
+	{
+		alert("State cannot be empty");
+		return;
+	}
+	if (in_phone == null || in_phone == "")
+	{
+		alert("Phone Number cannot be empty");
+		return;
+	}
+	if (in_developeremail == null || in_developeremail == "")
+	{
+		alert("Email Id cannot be empty");
+		return;
+	}
+		$http({
+			  method: 'POST',
+			  url: '/addprojectdetails',			  
+			  data: {"projectname":in_projectname,"description": in_description,"requirement":in_requirement,
+			  "plan" : in_plan, "addressline1" : in_addressline1, "addressline2":in_addressline2,"city":in_city,"postcode":in_postcode,
+			   "country":in_country,"state":in_state,  "phone":in_phone, "developeremail" : in_developeremail}
+			}).
+			  then(function(response) {
+				  $window.location.href = '/home';
+			  });
+			} 
+		$http({
+		 method: 'GET',
+		 url: '/checklogin'
+		 }).
+		 then(function(response)
+		 {
+		 	if(response.data.status===300)
+		 	{
+		 	$window.location.href='/';
+		 	}
+		 });
+		$scope.logoutsession= function () {
+		 //alert("in logout session");
+		 $http({
+		 method: 'GET',
+		 url: '/logoutsession'
+		 }).
+		then(function(response)
+		 {
+		 	if(response.data.status===300)
+		 	{
+		 	console.log("destroy session");
+		 	}else
+		 	{
+		 	$window.location.href='/';
+		 	}
+		 });
+		 } 
+ 		   $scope.viewplans = function (){
+			   $window.location.href = '/viewplans';
+			}
+ 
+		  $scope.developerprofile = function (){
+			   $window.location.href = '/developerprofile';
+			}
+			 $scope.developerdashboard = function (){
+			   $window.location.href = '/developerdashboard';
+			}
+			 $scope.developerproject = function (){
+			   $window.location.href = '/developerproject';
+			}
+				   $scope.home = function (){
+			   $window.location.href = '/home';
+			}
+			$scope.developerdefects = function (){
+						   $window.location.href = '/developerdefects';
+						}
+                                         $scope.billing = function (){
+						   $window.location.href = '/billing';
+						}
+}]);
+		</script>
+                                         <script>
+    var today = new Date();
+document.getElementById('time').innerHTML=today;
+    </script>
+	</body>
+</html>

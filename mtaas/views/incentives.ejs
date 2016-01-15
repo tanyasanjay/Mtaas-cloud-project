@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+	<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		    <meta charset="utf-8">
+		    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		    <meta name="viewport" content="width=device-width, initial-scale=1">
+		    <meta name="description" content="">
+		    <meta name="author" content="">		
+			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+			<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <title>Search testers Page</title>
+
+    <style>
+		html,
+		body {
+		  overflow-x: hidden; /* Prevent scroll on narrow devices */
+		}
+		body {
+		  padding-top: 70px;
+		}
+		footer {
+		  padding: 30px 0;
+		}		
+		@media screen and (max-width: 767px) {
+		  .row-offcanvas {
+		    position: relative;
+		    -webkit-transition: all .25s ease-out;
+		    -o-transition: all .25s ease-out;
+		    transition: all .25s ease-out;
+		  }		
+		  .row-offcanvas-right {
+		    right: 0;
+		  }		
+		  .row-offcanvas-left {
+		    left: 0;
+		  }		
+		  .row-offcanvas-right
+		  .sidebar-offcanvas {
+		    right: -50%; /* 6 columns */
+		  }		
+		  .row-offcanvas-left
+		  .sidebar-offcanvas {
+		    left: -50%; /* 6 columns */
+		  }		
+		  .row-offcanvas-right.active {
+		    right: 50%; /* 6 columns */
+		  }		
+		  .row-offcanvas-left.active {
+		    left: 50%; /* 6 columns */
+		  }		
+		  .sidebar-offcanvas {
+		    position: absolute;
+		    top: 0;
+		    width: 50%; /* 6 columns */
+		  }
+		}
+		.logoutLblPos{		
+		   position:fixed;
+		   right:10px;
+		   top:5px;
+		}
+
+	</style>
+
+  </head>
+	<body>
+	  <div ng-app="MtaaS" data-ng-controller="MtaaS1">
+	    <nav class="navbar navbar-fixed-top navbar-inverse">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#" ng-click = "home()">MTaas Crowdsourcing</a>
+	        </div>
+	        <div id="navbar" class="collapse navbar-collapse">
+	          <ul class="nav navbar-nav">
+	           <li><a href="#" ng-click = "home()">Home</a></li>
+	            <li><a href="#" ng-click="developerprofile()">Profile</a></li>
+	            <li><a href="#" ng-click = "developerproject()">My Projects</a></li>
+	            <li><a href="#" ng-click="developerdashboard()">Dashboard</a></li>
+                  <li><a href="#" ng-click="developerdefects()">Defects</a></li>
+                  <li><a href="#" ng-click="billing()">Billing</a></li>
+	          </ul>
+	           <label class="logoutLblPos">
+	          <a type="submit" align="right" class="btn btn-success" ng-click="logoutsession()" role="button" >Logout</a>
+	          </label>
+	        </div><!-- /.nav-collapse -->
+	      </div><!-- /.container -->
+	    </nav><!-- /.navbar -->	
+	    
+	    <!-- Table -->
+	             <div class="panel-body">
+	                            <div class="dataTable_wrapper">
+	                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+	                                    <thead>
+	                                        <tr>
+	                                            <th>Tester Expirence</th>
+	                                            <th>Number of defects</th>
+	                                            <th>Incentives Provided</th>
+	                                            
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+										<tr>
+	                                            <td>1-3 years</td>
+	                                            <td>15+</td>
+	                                            <td>Amazon Voucher $25 </td>
+	                                          
+	                                    </tr>
+	                                    <tr>
+	                                            <td>1-3 years</td>
+	                                            <td>25+</td>
+	                                            <td>Amazon Voucher $35 </td>
+	                                          
+	                                    </tr>
+	                                    <tr>
+	                                            <td>1-3 years</td>
+	                                            <td>50+</td>
+	                                            <td>Amazon Voucher $45 </td>
+	                                          
+	                                    </tr>
+	                                     
+	                                     <tr>
+	                                            <td>3-5 years</td>
+	                                            <td>15+</td>
+	                                            <td>Amazon Voucher $20 </td>
+	                                          
+	                                    </tr>
+	                                     <tr>
+	                                            <td>3-5 years</td>
+	                                            <td>25+</td>
+	                                            <td>Amazon Voucher $30 </td>
+	                                          
+	                                    </tr>
+	                                    <tr>
+	                                            <td>3-5 years</td>
+	                                            <td>50+</td>
+	                                            <td>Amazon Voucher $40 </td>
+	                                          
+	                                    </tr>
+	                                    <tr>
+	                                            <td>5+ years</td>
+	                                            <td>15+</td>
+	                                            <td>Amazon Voucher $15 </td>
+	                                          
+	                                    </tr>
+	                                    <tr>
+	                                            <td>5+ years</td>
+	                                            <td>25+</td>
+	                                            <td>Amazon Voucher $25 </td>
+	                                          
+	                                    </tr>
+	                                    <tr>
+	                                            <td>5+ years</td>
+	                                            <td>50+</td>
+	                                            <td>Amazon Voucher $35 </td>
+	                                          
+	                                    </tr>
+	                                    <tr>
+	                                            <td>10+ years</td>
+	                                            <td>15+</td>
+	                                            <td>Amazon Voucher $10 </td>
+	                                          
+	                                    </tr>
+	                                    <tr>
+	                                            <td>10+ years</td>
+	                                            <td>25+</td>
+	                                            <td>Amazon Voucher $20 </td>
+	                                          
+	                                    </tr>
+	                                    <tr>
+	                                            <td>10+ years</td>
+	                                            <td>50+</td>
+	                                            <td>Amazon Voucher $30 </td>
+	                                          
+	                                    </tr>
+	                                    </tbody>
+	                                </table>
+	                            </div>                      
+	          				</div>
+          
+          
+          
+        <script>
+     
+	var app=angular.module('MtaaS', []);
+	app.controller('MtaaS1', ['$scope', '$http', '$window', function ( $scope,$http,$window)
+	 {
+			
+           $scope.home = function (){
+			   $window.location.href = '/home';
+			}
+               $scope.developerprofile = function (){
+			   $window.location.href = '/developerprofile';
+			}
+			$scope.developerproject = function (){
+			   $window.location.href = '/developerproject';
+			}
+			$scope.developerdashboard = function (){
+			   $window.location.href = '/developerdashboard';
+ 			}
+			  $scope.developerhome = function (){
+			   $window.location.href = '/developerhome';
+			}
+			$scope.developerdefects = function (){
+						   $window.location.href = '/developerdefects';
+						}
+            $scope.billing = function (){
+						   $window.location.href = '/billing';
+						}
+     }]);
+          
+          </script>
+	          				</body>
+	          				</html>

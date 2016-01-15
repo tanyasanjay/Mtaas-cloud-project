@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PAYMENT GATEWAY </title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<center><a href="http://payments.intuit.com/payments/landing_pages/LB/default.jsp?c=VMAD&l=H&s=3&b=FFFFFF'target='_blank"><img alt="Credit card logos" title="Credit card logos"src="http://payments.intuit.com/payments/landing_pages/LB/default.jsp?c=VMAD&l=H&s=3&b=FFFFFF"/></a> 	    
+</head>
+<body>
+<div class="panel panel-primary" style="width:50%;margin:0 auto; margin-top:10%">
+<div class="panel-heading"><h3>Payment Gateway</h3></div>
+<div class="panel-body" style="height:40%; text-align:center;" >
+<p class="bg-info" id="msg"></p>
+ <form class="form-horizontal" role="form" id="paypalForm" method="post" action="/paynow">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="amount">Amount:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="amount" placeholder="Enter Amount" required="required" ng-model="amount">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="currency">Currency:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="currency" placeholder="Enter Currency Type" ng-model = "currency" required="required">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="description">Description:</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" name="description" placeholder="Enter Description" ng-model = "description"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="send" class="btn btn-primary btn-lg" ng-click = "paynow()" type="submit">
+         <span class="glyphicon glyphicon-send" ></span> Pay Now
+      </button>
+    </div>
+  </div>
+</form>
+</div>
+</div>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    
+
+    
+    <script type ='text/javascript'>
+	var app=angular.module('MtaaS', [])
+	 app.controller('MtaaS1', ['$scope', '$http', '$window', function ( $scope,$http,$window)
+	 {	
+         
+         
+         
+         $http({
+			 method: 'GET',
+			 url: '/checklogin'
+			 }).
+			 then(function(response)
+			 {
+			 	if(response.data.status===300)
+			 	{
+			 	$window.location.href='/';
+			 	}
+			 });
+          $scope.logoutsession= function () {
+			 $http({
+			 method: 'GET',
+			 url: '/logoutsession'
+			 }).
+			then(function(response)
+			 {
+			 	if(response.data.status===300)
+			 	{
+			 	console.log("destroy session");
+			 	}else
+			 	{
+			 	$window.location.href='/thankyou';
+			 	}
+			 });
+			 } 
+              
+         
+		$scope.paynow = function (){
+                var in_amount = $scope.amount;
+				var in_currency = $scope.currency;
+				var in_description = $scope.description;
+            $http({
+			  method: 'POST',
+			  url: '/paynow',			  
+			  data: {"amount":in_amount,"currency":in_currency,"description": in_description}
+                  }).
+			  then(function(response) {
+				  $window.location.href = '/';
+			  });
+			}
+     }]);
+    </script>
+    
+    
+    </body>
+</html>

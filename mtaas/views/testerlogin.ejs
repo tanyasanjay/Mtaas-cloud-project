@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		    <meta charset="utf-8">
+		    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		    <meta name="viewport" content="width=device-width, initial-scale=1">
+		    <meta name="description" content="">
+		    <meta name="author" content="">
+  			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  			<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">  
+
+    <title>MTaas Crowdsourcing</title>
+     </head>
+
+  <body>
+  		<div ng-app="MtaaS" data-ng-controller="MtaaS">
+	    <nav class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" >MTaaS Crowdsourcing </a>
+	        </div>
+		        <div id="navbar" class="navbar-collapse collapse">
+	          <form class="navbar-form navbar-right">
+	            <div class="form-group">
+	              <input type="text" placeholder="User ID" class="form-control" ng-model = "name">
+	            </div>
+	            <div class="form-group">
+	              <input type="password" placeholder="Password" class="form-control" ng-model = "password">
+	            </div>
+	            <a input type="submit" class="btn btn-success" ng-click="testersignin()" role="button">Login</a>
+	          </form>
+	        </div><!--/.navbar-collapse -->
+	      </div>
+	    </nav>
+	
+	    <div class="jumbotron">
+	      <div class="container">
+	        <h2>MTaaS Crowdsourcing for Testers</h2>
+	        <p>Program testing can be used to show the presence of bugs, but never to show their absence!Discovering the unexpected is more important than confirming the known. Testers don’t break software, but help fixing the software which is broken! Welcome tester to the MtaaS crowdsourcing and get started!</p>
+	       </div>
+	    </div>      
+    </div> <!-- /container -->
+
+    <script>
+		var app=angular.module('MtaaS', [])
+		 app.controller('MtaaS', ['$scope', '$http', '$window', function( $scope,$http,$window)
+			 {
+				 $http({
+				 method: 'GET',
+				 url: '/checklogin'
+				 }).
+				 then(function(response)
+				 {
+				if(response.data.status===200)
+			 	 {
+			 	 $window.location.href='/testerhome';
+			 	 }
+				 });
+			$scope.testersignin = function ()
+			{
+					var in_name = $scope.name;
+					var in_password=$scope.password;
+					if (in_name == null || in_name == "")			 
+					{
+						alert("Username cannot be empty!!");
+						return;
+					}
+					if (in_password == null || in_password == "")
+					{
+						alert("password cannot be empty!!");
+						return;
+					}
+					$http({
+			      	  method: 'POST',
+			      	  url: '/testersignin',
+			      	  data: {"name":in_name,"password":in_password}
+			        }).
+			          then(function(response) {
+			          if(response.data.status == 100)
+			          {
+			          	alert("Invalid User and Password!");
+			          }
+			          else
+			          {
+			        	  $window.location.href = '/testerhome';
+			          }
+			          }); 
+				}        
+			  }]);   
+		</script>
+	</body>
+</html>

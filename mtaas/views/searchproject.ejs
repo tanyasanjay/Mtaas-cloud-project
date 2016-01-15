@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+	<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		    <meta charset="utf-8">
+		    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		    <meta name="viewport" content="width=device-width, initial-scale=1">
+		    <meta name="description" content="">
+		    <meta name="author" content="">		
+			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+			<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <title>Search testers Page</title>
+
+    <style>
+		html,
+		body {
+		  overflow-x: hidden; /* Prevent scroll on narrow devices */
+		}
+		body {
+		  padding-top: 70px;
+		}
+		footer {
+		  padding: 30px 0;
+		}		
+		@media screen and (max-width: 767px) {
+		  .row-offcanvas {
+		    position: relative;
+		    -webkit-transition: all .25s ease-out;
+		    -o-transition: all .25s ease-out;
+		    transition: all .25s ease-out;
+		  }		
+		  .row-offcanvas-right {
+		    right: 0;
+		  }		
+		  .row-offcanvas-left {
+		    left: 0;
+		  }		
+		  .row-offcanvas-right
+		  .sidebar-offcanvas {
+		    right: -50%; /* 6 columns */
+		  }		
+		  .row-offcanvas-left
+		  .sidebar-offcanvas {
+		    left: -50%; /* 6 columns */
+		  }		
+		  .row-offcanvas-right.active {
+		    right: 50%; /* 6 columns */
+		  }		
+		  .row-offcanvas-left.active {
+		    left: 50%; /* 6 columns */
+		  }		
+		  .sidebar-offcanvas {
+		    position: absolute;
+		    top: 0;
+		    width: 50%; /* 6 columns */
+		  }
+		}
+        .body123{
+    color:white;
+}
+
+		.logoutLblPos{		
+		   position:fixed;
+		   right:10px;
+		   top:5px;
+		}
+
+	</style>
+
+  </head>
+	<body>
+	  <div ng-app="MtaaS" data-ng-controller="MtaaS1">
+	    <nav class="navbar navbar-fixed-top navbar-inverse">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#" ng-click = "home()">MTaas Crowdsourcing</a>
+	        </div>
+	        <div id="navbar" class="collapse navbar-collapse">
+	          <ul class="nav navbar-nav">
+	            <li><a href="#" ng-click="testerhome()">Home</a></li>
+	            <li><a href="#" ng-click="testerprofile()">Profile</a></li>
+	            <li><a href="#" ng-click="testerproject()">My Projects</a></li>
+	            <li><a href="#" ng-click="testerdashboard()">Dashboard</a></li>
+	            <li><a href="#" ng-click="testerdefects()">Defects</a></li>
+	          </ul>
+	           <div class = "body123">
+          
+        
+	          <label class="logoutLblPos"><h6><span id="time"></span>
+	          <a type="submit" align="right" class="btn btn-success" ng-click="logoutsession()" role="button" >Logout</a>
+	          </label> </h6></div>
+	        </div><!-- /.nav-collapse -->
+	      </div><!-- /.container -->
+	    </nav><!-- /.navbar -->	
+	    <div class="container">	
+	     <div class="col-xs-9 col-sm-9">
+	          <p class="pull-right visible-xs">
+	            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+	          </p>
+	          <div class="jumbotron">
+	              <div class="form-group">
+	              <legend>Available Projects</legend>
+	             <input type="text" ng-model = "search" placeholder="Search Projects" class="form-control" typeahead-on-select="processSearch($process)">
+	            </div>
+	            
+	                        <!-- Table -->
+	             <div class="panel-body">
+	                            <div class="dataTable_wrapper">
+	                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+	                                    <thead>
+	                                        <tr>
+	                                            <th>Project ID</th>
+	                                            <th>Project Name</th>
+	                                            <th>Project Type</th>
+	                                            <th>App Provider Name</th>
+	                                            <th>Email id</th>
+	                                            <th>Phone</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+										<tr ng-repeat="pro in projects| filter: search" class="even gradeC">
+	                                            <td><center>{{pro.projectdetails_id}}</center></td>
+	                                            <td>{{pro.projectname}}</td>
+	                                            <td>{{pro.projecttype1}}</td>
+	                                            <td class="center"><center>{{pro.d_username}}</center></td>
+	                                            <td>{{pro.developeremail}}</td>
+	                                            <td class="center">{{pro.phone}}</td>
+	                                    </tr>
+	                                    </tbody>
+	                                </table>
+	                            </div>                      
+	          				</div>
+	                	 </div><!--/.col-xs-12.col-sm-9-->
+	      			</div><!--/row-->	
+	    		</div>
+    
+<script>
+     
+	var app=angular.module('MtaaS', []);
+	app.controller('MtaaS1', ['$scope', '$http', '$window', function ( $scope,$http,$window)
+	 {
+			 $scope.fetchprojects = function() {
+	   		    	$http({
+	   		            method: 'GET',
+	   		            url: '/fetchprojects',
+	   		            }).success(function(response){
+	   		           		//alert(JSON.stringify(response));
+	   		           		$scope.projects= JSON.parse(response.result);
+	   		        }).error(function(error){
+	   		            alert("ERROR VIEWING PENDING CUSTOMER REQUEST");
+	   		        });
+	   		    }; 
+	   		 $scope.fetchprojects(); 
+			  $http({
+			 method: 'GET',
+			 url: '/checklogin'
+			 }).
+			 then(function(response)
+			 {
+			 	if(response.data.status===300)
+			 	{
+			 	$window.location.href='/';
+			 	}
+			 });
+			   $scope.logoutsession= function () {
+			 $http({
+			 method: 'GET',
+			 url: '/logoutsession'
+			 }).
+			then(function(response)
+			 {
+			 	if(response.data.status===300)
+			 	{
+			 	console.log("destroy session");
+			 	}else
+			 	{
+			 	$window.location.href='/';
+			 	}
+			 });
+			 } 
+ 				 $scope.testerprofile = function (){
+			   $window.location.href = '/testerprofile';
+			}
+			$scope.testerproject = function (){
+			   $window.location.href = '/testerproject';
+			}
+			$scope.testerdashboard = function (){
+			   $window.location.href = '/testerdashboard';
+ 			}
+			  $scope.testerhome = function (){
+			   $window.location.href = '/testerhome';
+			}
+			$scope.testerdefects = function (){
+						   $window.location.href = '/testerdefects';
+						}
+  
+  }]);
+		</script>
+          <script>
+    var today = new Date();
+document.getElementById('time').innerHTML=today;
+    </script>
+ 	</body>
+ </html>

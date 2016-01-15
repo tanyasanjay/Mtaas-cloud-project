@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<script type="text/javascript" src="./fusioncharts-suite-xt/js/fusioncharts.js"></script>
+	<script type="text/javascript" src="./fusioncharts-suite-xt/js/themes/fusioncharts.theme.fint.js"></script>
+    
+  </head>
+
+  <body>
+  	<table>
+		<tr>
+			<div ng-app="MtaaS" data-ng-controller="MtaaS">
+				<div fusioncharts width="600" height="400" type="column2d" dataSource="">
+				</div>
+			</div>
+		</tr>
+	</table>					
+  <script>
+    var global_json_result;
+
+  	var app=angular.module('MtaaS', ["ng-fusioncharts"]);
+ 	app.controller('MtaaS', ['$scope', '$http', '$window', function ( $scope,$http,$window)
+ 	{
+		$scope.searchsupplierdetails = function() {
+   		    	$http({
+   		            method: 'GET',
+   		            url: '/searchsupplierdetails',
+   		            }).success(function(response){
+   		            
+   		            	console.log("hereeeeeeeeeenooooooooooo111111111111");
+   		           		global_json_result = response.result;
+   		           		console.log(JSON.stringify(global_json_result));
+   		           		$scope.suppliers= JSON.parse(response.result);
+   		           		$scope.searchsupplierdetails();
+   		        }).error(function(error){
+   		            alert("ERROR VIEWING PENDING CUSTOMER REQUEST");
+   		        });
+   		    }; 
+   		
+		$scope.searchsupplierdetails();
+
+		$scope.myDataSource = {
+			chart: {
+				//Define the chart attributes.
+				"caption": "Split of Visitors by Age Group",
+				"subCaption": "Last year",
+				"paletteColors": "#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000",
+				"bgColor": "#ffffff",
+				"showBorder": "0",
+				"use3DLighting": "0",
+				"showShadow": "0",
+				"enableSmartLabels": "0",
+				"startingAngle": "0",
+				"showPercentValues": "1",
+				"showPercentInTooltip": "0",
+				"decimals": "1",
+				"captionFontSize": "14",
+				"subcaptionFontSize": "14",
+				"subcaptionFontBold": "0",
+				"toolTipColor": "#ffffff",
+				"toolTipBorderThickness": "0",
+				"toolTipBgColor": "#000000",
+				"toolTipBgAlpha": "80",
+				"toolTipBorderRadius": "2",
+				"toolTipPadding": "5",
+				"showHoverEffect": "1",
+				"showLegend": "1",
+				"legendBgColor": "#ffffff",
+				"legendBorderAlpha": "0",
+				"legendShadow": "0",
+				"legendItemFontSize": "10",
+				"legendItemFontColor": "#666666",
+				"useDataPlotColorForLabels": "1"
+			},
+			data: global_json_result
+		};	
+		}]);
+  </script>
+  </body>
+</html>
+
+                                    

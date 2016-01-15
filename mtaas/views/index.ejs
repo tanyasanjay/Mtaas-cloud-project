@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+	<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	    <meta charset="utf-8">  
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>  
+	    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">  
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <title>MTaas Crowdsourcing</title>
+    <style>
+        
+        
+.b{   
+  animation-duration: 2000ms;
+  animation-name: blink;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.text-center {
+    text-align:center;
+}
+.no-boder {
+    border:1px solid #f3f3f3;
+}
+
+p {
+    font-size:16px;
+    line-height:25px;
+    padding-top:20px;
+}
+.panel-back {
+    background-color:#F8F8F8;
+
+}
+   .noti-box {
+min-height: 100px;
+padding: 20px;
+}
+
+    .noti-box .icon-box {
+display: block;
+float: left;
+margin: 0 15px 10px 0;
+width: 70px;
+height: 70px;
+line-height: 75px;
+vertical-align: middle;
+text-align: center;
+font-size: 40px;
+}
+
+.main-text {
+    font-size: 25px;
+    font-weight:600;
+}
+.set-icon {
+    -webkit-border-radius: 50px;
+-moz-border-radius: 50px;
+border-radius: 50px;
+
+}
+    .bg-color-green {
+background-color: #00CE6F;
+color: #fff;
+}
+ .bg-color-blue {
+background-color: #A95DF0;
+color: #fff;
+}
+
+  .bg-color-brown {
+background-color: #B94A00;
+color: #fff;
+}
+</style>
+</head>
+
+    <body>
+        <div ng-app="MtaaS" data-ng-controller="MtaaS">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" >MTaaS Crowdsourcing</a>
+            
+            </div>
+          
+        <div id="navbar" class="navbar-collapse collapse">
+           
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+          <br></br>
+            <h2><b>MTaaS Crowdsourcing</b></h2>
+        <p>'Pivoting is not the end of the disruption process, but the beginning of the next leg of your journey'. Welcome to the era of MTaaS Crowdsourcing. The key benefit of crowdsourcing today is speed! You can bring better innovation to market FASTER! Crowdsourcing connects people with the latest ideas and best practices in crowdsourcing and the crowd economy.</p>
+		<p><input class ="btn btn-info btn-lg" type="submit" ng-click="login()" value = "App Provider">
+		<input class ="btn btn-primary btn-lg" type="submit" ng-click="registerdeveloper()" value = "Register as App Provider"></p>
+		<p><input class ="btn btn-info btn-lg" type="submit" ng-click="testerlogin()" value = "Tester Login ">
+		<input class ="btn btn-primary btn-lg" type="submit" ng-click="registertester()" value = "Register as Tester"></p>
+        <p><input class ="btn btn-danger btn-lg" type="submit" ng-click="adminlogin()" value = "Admin"></p>
+	
+      </div>
+    </div>
+              <!-- /. ROW  -->
+             <div class = "container">
+                <div class="row">
+
+            <div class="col-md-4 col-sm-6 col-xs-6">           
+			<div class="panel panel-back noti-box">
+                <span class="icon-box bg-color-green set-icon">
+                    <i class="fa fa-bars"></i>
+                </span>
+                <div class="text-box" >
+                    <div ng-repeat = "c in testerscount">
+                    <p class="main-text">{{c.tester_id}} Testers</p>
+                    
+                    </div>
+                </div>
+             </div>
+		     </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">           
+			<div class="panel panel-back noti-box">
+                <span class="icon-box bg-color-blue set-icon">
+                    <i class="fa fa-bars"></i>
+                </span>
+                <div class="text-box" >
+                    <div ng-repeat = "cd in developerscount">
+                    <p class="main-text">Providers {{cd.developer_id}}</p>
+                    </div>
+                </div>
+             </div>
+		     </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">           
+			<div class="panel panel-back noti-box">
+                <span class="icon-box bg-color-brown set-icon">
+                    <i class="fa fa-bars"></i>
+                </span>
+                <div class="text-box" >
+                    <div ng-repeat = "cp in projectscount">
+                    <p class="main-text">Projects {{cp.projectdetails_id}}</p>
+                    
+                </div>
+             </div>
+		     </div>
+			</div>
+                 </div>
+                 <br></br>
+			
+
+		
+		
+	</div>		
+<nav class="navbar navbar-inverse ">
+    <div class="container-fluid">
+    <div>
+    <ul class="nav navbar-nav">
+      <li><a href="#" ng-click="aboutus()"><strong>About Us</strong></a></li>
+      <li><a href="#" ng-click="contactus()"><strong>Contact Us</strong></a></li>
+      <li><a href="#" ng-click="terms()"><strong>Terms and Conditions</strong></a></li><br/>
+    </ul>
+  </div>
+</div>
+</nav>	
+	
+		</div>
+		
+		
+	   
+	      
+    </div> <!-- /container -->
+		
+    
+    <script >
+    var app=angular.module('MtaaS', [])
+ app.controller('MtaaS', ['$scope', '$http', '$window', function( $scope,$http,$window)
+ {
+ $http({
+				 method: 'GET',
+				 url: '/checklogin'
+				 }).
+				 then(function(response)
+				 {
+				if(response.data.status===200)
+			 	 {
+			 	 $window.location.href='/home1';
+			 	 }
+				 });
+ 
+ $scope.counttesters = function() {
+	   		    	$http({
+	   		            method: 'GET',
+	   		            url: '/counttesters',
+	   		            }).success(function(response){
+	   		           		//alert(JSON.stringify(response));
+	   		           		$scope.testerscount= JSON.parse(response.result);
+	   		        }).error(function(error){
+	   		            alert("ERROR VIEWING PENDING CUSTOMER REQUEST");
+	   		        });
+	   		    }; 
+	   		 $scope.counttesters();
+	   		 
+	   		  $scope.countdevelopers = function() {
+	   		    	$http({
+	   		            method: 'GET',
+	   		            url: '/countdevelopers',
+	   		            }).success(function(response){
+	   		           		//alert(JSON.stringify(response));
+	   		           		$scope.developerscount= JSON.parse(response.result);
+	   		        }).error(function(error){
+	   		            alert("ERROR VIEWING PENDING CUSTOMER REQUEST");
+	   		        });
+	   		    }; 
+	   		 $scope.countdevelopers();
+	   		 
+	   		   $scope.countprojects = function() {
+	   		    	$http({
+	   		            method: 'GET',
+	   		            url: '/countprojects',
+	   		            }).success(function(response){
+	   		           		//alert(JSON.stringify(response));
+	   		           		$scope.projectscount= JSON.parse(response.result);
+	   		        }).error(function(error){
+	   		            alert("ERROR VIEWING PENDING CUSTOMER REQUEST");
+	   		        });
+	   		    }; 
+	   		 $scope.countprojects();
+         
+			 
+		$scope.registerdeveloper = function ()
+		{
+	   $window.location.href = '/registerdeveloper';
+		}
+		$scope.login = function ()
+		{
+	   $window.location.href = '/login';
+		}
+		$scope.registertester = function ()
+		{
+	   $window.location.href = '/registertester';
+		}
+		$scope.testerlogin = function ()
+		{
+	   $window.location.href = '/testerlogin';
+		}
+        $scope.adminlogin = function ()
+		{
+	   $window.location.href = '/adminlogin';
+		}
+	
+		
+		$scope.aboutus = function ()
+		{
+			//alert("hai")
+		   $window.location.href = '/aboutus';
+		}
+
+	$scope.contactus = function()
+	{
+		$window.location.href = '/contactus';
+	}
+				 
+	$scope.terms = function()
+	{
+		$window.location.href = '/terms';
+	}		
+					
+
+  }]);   
+    
+    
+    </script>
+    
+
+</body></html>

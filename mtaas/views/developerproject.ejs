@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+	<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		    <meta charset="utf-8">
+		  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		    <meta name="viewport" content="width=device-width, initial-scale=1">    
+		    <meta name="description" content="">
+		    <meta name="author" content="">
+			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+			<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">   
+		  
+    <title>Developer Project </title>
+	<style>
+				html,
+				body {
+				  overflow-x: hidden; /* Prevent scroll on narrow devices */
+				}
+				body {
+				  padding-top: 70px;
+				}
+				footer {
+				  padding: 30px 0;
+				}				
+				@media screen and (max-width: 767px) {
+				  .row-offcanvas {
+				    position: relative;
+				    -webkit-transition: all .25s ease-out;
+				         -o-transition: all .25s ease-out;
+				            transition: all .25s ease-out;
+				  }				
+				  .row-offcanvas-right {
+				    right: 0;
+				  }				
+				  .row-offcanvas-left {
+				    left: 0;
+				  }				
+				  .row-offcanvas-right
+				  .sidebar-offcanvas {
+				    right: -50%; /* 6 columns */
+				  }				
+				  .row-offcanvas-left
+				  .sidebar-offcanvas {
+				    left: -50%; /* 6 columns */
+				  }				
+				  .row-offcanvas-right.active {
+				    right: 50%; /* 6 columns */
+				  }				
+				  .row-offcanvas-left.active {
+				    left: 50%; /* 6 columns */
+				  }				
+				  .sidebar-offcanvas {
+				    position: absolute;
+				    top: 0;
+				    width: 50%; /* 6 columns */
+				  }
+				}
+        .body123{
+    color:white;
+}
+
+				.logoutLblPos{				
+				   position:fixed;
+				   right:10px;
+				   top:5px;
+				}				
+	</style>   
+</head>
+
+<body>
+	<div ng-app="MtaaS" data-ng-controller="MtaaS1">
+	<form name="mainform">		
+		    <nav class="navbar navbar-fixed-top navbar-inverse">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#" ng-click = "home()">MTaaS Crowdsourcing</a>
+	                    <form class="navbar-form navbar-right">
+		          </form>
+		        </div>
+		        <div id="navbar" class="collapse navbar-collapse">
+		          <ul class="nav navbar-nav">
+		            <li><a href="#" ng-click="home()">Home</a></li>
+		            <li><a href="#" ng-click="developerprofile()">Profile</a></li>
+		            <li  class="active"><a href="#" ng-click="developerproject()">My Projects</a></li>
+		            <li><a href="#" ng-click="developerdashboard()">Dashboard</a></li>
+		            <li><a href="#" ng-click="developerdefects()">Defects</a></li>
+                      <li><a href="#" ng-click="billing()">Billing</a></li>
+		          </ul>
+		          <div class = "body123">
+          
+        
+	          <label class="logoutLblPos"><h6><span id="time"></span>
+	          <a type="submit" align="right" class="btn btn-success" ng-click="logoutsession()" role="button" >Logout</a>
+	          </label> </h6></div>
+		        </div><!-- /.nav-collapse -->
+		      </div><!-- /.container -->
+		    </nav><!-- /.navbar -->		
+		    <div class="container">		
+		      <div class="row row-offcanvas row-offcanvas-right">		
+		        <div class="col-xs-12 col-sm-9">
+		          <p class="pull-right visible-xs">
+		            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+		          </p>		          		          
+		        </div><!--/.col-xs-12.col-sm-9-->		
+		        <div class="jumbotron">
+		              <div class="form-group">				    
+                          <div class="panel-body"><h2> <font color="blue">Projects</font></h2>
+		                            <div class="dataTable_wrapper">
+		                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+		                                    <thead>
+		                                        <tr>
+		                                            <th>Project ID</th>
+		                                            <th>Project Name</th>
+		                                            
+		                                            <th>Project Description</th>
+		                                            <th>Project Requirement</th>
+		                                            <th>Plan</th>
+		                                            
+		                                        </tr>
+		                                    </thead>
+		                                    <tbody>
+											<tr ng-repeat="p in myprojects| filter: search" class="even gradeC">
+		                                            <td>{{p.projectdetails_id}}</td>
+		                                            <td>{{p.projectname}}</td>
+		                                            
+		                                            <td class="center">{{p.description}}</td>
+		                                            <td class="center">{{p.requirement}}</td>
+		                                            <td class="center">{{p.plan}}</td>
+		                                            
+		                                    </tr>
+		                                    </tbody>
+		                                </table>
+		                            </div>         
+		         		     </div><!--/.container-->  
+                          <div class="panel-body">
+	                            <div class="dataTable_wrapper">
+                                    <h2> <font color="blue">Available Testers</font></h2><font color="red"><h5>(Please notify tester before selecting)</font></h5><input type = "text" name="projectname123" ng-model="projectname123" placeholder = "Project Name">
+                                    <br></br><font color="red">(Please enter the project name and than the select tester)</font><br></br>
+	                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+	                                    <thead>
+	                                        <tr>
+	                                            <th>Tester ID</th>
+	                                            <th>Tester Name</th>
+	                                            <th>Tester Email</th>
+                                                <th>Tester Type</th>
+	                                            <th>Experience</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+										<tr ng-repeat="tester in testers| filter: search" class="even gradeC">
+	                                            <td><centeR>{{tester.tester_id}}</centeR></td>
+	                                            <td>{{tester.username}}</td>
+	                                            <td>{{tester.email}}</td>
+                                            <td>{{tester.projecttype}}</td>
+                                             
+                                            <td><center>{{tester.experience}}</center></td>
+                                            
+	                       <td><button type="button"  ng-click="assign(tester)" class="btn btn-primary" >Select Tester</button></td>
+                                        
+                           <td><button type="button" class="btn btn-primary" ng-click = "email(tester)">Notify Tester</button></td>
+                                            </tr>
+	                                    </tbody>
+	                                </table>
+	                            </div>                      
+	          				</div>
+
+ <script>
+	   var app=angular.module('MtaaS', []);
+	 	app.controller('MtaaS1', ['$scope', '$http', '$window', function ( $scope,$http,$window)
+	 		{
+ 				$http({
+			 method: 'GET',
+			 url: '/checklogin'
+			 }).
+			 then(function(response)
+			 {
+			 	if(response.data.status===300)
+			 	{
+			 	$window.location.href='/';
+			 	}
+			 });
+		$scope.logoutsession= function () 
+			{
+				 $http({
+				 method: 'GET',
+				 url: '/logoutsession'
+				 }).
+				then(function(response)
+				 {
+				 	if(response.data.status===300)
+				 	{
+				 	console.log("destroy session");
+				 	}else
+				 	{
+				 	$window.location.href='/';
+				 	}
+				 });
+			 } 
+ 				
+ 				
+ 				$http({
+			      	  method: 'GET',
+			      	  url: '/developermyprojects'
+						}).
+			          then(function(response) {
+			         //alert(response.data.result);
+			         $scope.myprojects = angular.fromJson(response.data.result);
+			          }); 			          
+			$scope.gettester = function() {
+        		    $http({
+	                  method: 'GET',
+	                  url: '/gettester',
+	                  }).success(function(response){
+	                    //alert(JSON.stringify(response));
+	                    $scope.testers= JSON.parse(response.result);
+	              }).error(function(error){
+	                  alert("ERROR VIEWING TESTERS");
+	              });
+	          };
+                $scope.gettester();	
+                
+               
+					          
+				 $scope.home = function (){
+				   $window.location.href = '/home';
+				}         
+				 $scope.developerprofile = function (){
+				   $window.location.href = '/developerprofile';
+				}
+				$scope.developerproject = function (){
+				   $window.location.href = '/developerproject';
+				}
+				$scope.developerdashboard = function (){
+				   $window.location.href = '/developerdashboard';
+	 			}
+	 			$scope.developerdefects = function (){
+						   $window.location.href = '/developerdefects';
+						}
+                $scope.billing = function (){
+						   $window.location.href = '/billing';
+						}
+             $scope.email=function(tester){
+		$http({
+			method:'POST',
+		    url:'/email',
+		    data:{"email":tester.email}
+		}).success(function(response){
+			$window.location.href = '/developerproject';
+			alert("Tester is been notified");
+		});
+             };
+        
+        
+        
+        
+    
+                
+         $scope.assign=function(tester){
+             var in_projectname123=$scope.projectname123;
+             
+             if (in_projectname123 == null || in_projectname123 == "")
+	{
+		alert("Please enter project name");
+		return;
+	}
+		$http({
+			method:'POST',
+		    url:'/assign',
+		    data:{"username": tester.username, "tester_id": tester.tester_id, "projectname123" : in_projectname123}
+            }).success(function(response){
+              $window.location.href = '/developerproject';
+             alert("Tester is been selected");				
+        });
+        };
+	  }]);  
+ 		</script>
+      <script>
+    var today = new Date();
+document.getElementById('time').innerHTML=today;
+    </script>
+ 	</body>
+ </html>
